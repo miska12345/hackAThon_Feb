@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
+
 public class xmlparser {
 	
 	//Given a user's unique schedule path, read file and return Schedule obj
@@ -41,7 +42,8 @@ public class xmlparser {
 			mDate d = new mDate();
 			Element dat = schedule.addElement("Date");
 			d.setDate(sc.getDates().get(i).getDate());
-			dat.setText(d.getDateStr());
+			d.setColor(sc.getDates().get(i).getColor());
+			dat.setText(d.getDateStr() + "@" + d.getColor());
 			dates.add(dat);
 			for (int j = 0; j < sc.getDates().get(i).getEvents().size(); j++) {
 				Element ev = dat.addElement("Event");
@@ -78,7 +80,9 @@ public class xmlparser {
 	        while (iter.hasNext()) {
 	            Element date = iter.next();
 	            mDate d = new mDate();
-	            d.setDate(date.getText());
+	            String[] dparts = date.getText().split("@");
+	            d.setDate(dparts[0]);
+	            d.setColor(dparts[1]);
 	            Iterator<Element> bIter = date.elementIterator();
 	            while (bIter.hasNext()) {
 	            	Element eve = bIter.next();

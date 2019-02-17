@@ -6,4 +6,5 @@ public interface IDAOInterface {
 	
 	public Member findByName(String name) throws Exception;
 	
+	public boolean alter(Member mem) throws Exception;
 }

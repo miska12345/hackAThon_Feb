@@ -12,12 +12,15 @@ import xml.xmlparser;
 
 public class test {
 	public static void main(String[] args) throws Exception {
-		Member mem = new Member();
-		mem.setUsername("admin");
-		mem.setPassword("wassup");
-		mem.setCanvas("UW");
-		mem.setCanvasAccount("no");
-		mem.setSchedule("default");
-		IDAOFactory.getIDAO().doCreate(mem);
+		Schedule sc = new Schedule();
+		mDate d = new mDate();
+		mEvent e = new mEvent();
+		e.setName("watch movie");
+		e.setNote("nah");
+		d.getEvents().add(e);
+		d.setDate("2019-10-11 11:11:11");
+		d.setColor("rgb(1,2,3)");
+		sc.getDates().add(d);
+		xmlparser.write(sc, "d:" + File.separator + "output.xml");
 	}
 }

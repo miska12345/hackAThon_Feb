@@ -38,4 +38,16 @@ public class IDAOProxy implements IDAOInterface{
 		return mem;
 	}
 
+	@Override
+	public boolean alter(Member mem) throws Exception {
+		boolean flag = false;
+		try {
+			flag = IDAObase.alter(mem);
+		} catch (Exception e) {
+			throw e;
+		}
+		this.dbc.close();
+		return flag;
+	}
+
 }

@@ -10,8 +10,10 @@ import xml.mEvent;
 public class mDate {
 		private List<mEvent> events;
 		private Date date;
+		private String color;
 		public mDate() {
 			events = new ArrayList<>();
+			color = "#5697ff"; // Default color
 		}
 		
 		public List<mEvent> getEvents() {
@@ -39,6 +41,14 @@ public class mDate {
 		
 		public void setDate(Date date){
 			this.date = date;
+		}
+
+		public String getColor() {
+			return color;
+		}
+
+		public void setColor(String color) {
+			this.color = color;
 		}
 		
 }

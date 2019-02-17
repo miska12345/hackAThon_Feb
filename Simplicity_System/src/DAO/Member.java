@@ -9,6 +9,7 @@ public class Member {
 	private String Canvas;
 	private String CanvasAccount; //username|password
 	private String schedule; 
+	private String displayName;
 	public int getUid() {
 		return uid;
 	}
@@ -44,5 +45,11 @@ public class Member {
 	}
 	public void setSchedule(String schedule) {
 		this.schedule = schedule;
+	}
+	public String getDisplayName() {
+		return displayName;
+	}
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 }

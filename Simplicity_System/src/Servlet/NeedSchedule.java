@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.Member;
+import util.Local;
 import xml.Schedule;
 import xml.xmlparser;
 
@@ -18,8 +19,9 @@ public class NeedSchedule extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		if (util.Validate.isOnline(req.getSession())) {
 			Member user = (Member)req.getSession().getAttribute("member");
-			String path = req.getServletContext().getRealPath("/") + "Schedules" + File.separator +
-					user.getSchedule()+".xml";
+			//String path = req.getServletContext().getRealPath("/") + "Schedules" + File.separator +
+					//user.getSchedule()+".xml";
+			String path = Local.getPathSchedule(req, user);
 			Schedule sc = xmlparser.parse(path);
 			req.getSession().setAttribute("ah", path);
 			if (sc != null) {

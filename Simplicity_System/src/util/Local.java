@@ -1,5 +1,9 @@
 package util;
 
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+
 import DAO.Member;
 
 public class Local {
@@ -15,5 +19,11 @@ public class Local {
 		str += (mem.getCanvas());
 		
 		return str;
+	}
+	
+	public static String getPathSchedule(HttpServletRequest req, Member mem) {
+		String path = req.getServletContext().getRealPath("/") + "Schedules" + File.separator +
+				mem.getSchedule()+".xml";
+		return path;
 	}
 }
