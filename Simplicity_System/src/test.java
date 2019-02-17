@@ -24,17 +24,6 @@ public class test {
 		
 		}
 		xmlparser.write(sc);*/
-		
-		Schedule sc = xmlparser.read();
-		Iterator<mDate> iter = sc.getDates().iterator();
-		while (iter.hasNext()) {
-			mDate d = iter.next();
-			Iterator<mEvent> iter2 = d.getEvents().iterator();
-			System.out.print(d.getDateStr() + " | ");
-			while (iter2.hasNext()) {
-				mEvent e = iter2.next();
-				System.out.println(e.getName() + " | " + e.getNote());
-			}
-		}
+
 	}
 }
