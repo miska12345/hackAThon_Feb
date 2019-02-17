@@ -12,6 +12,7 @@ import util.Local;
 import xml.Schedule;
 import xml.xmlparser;
 
+//Set color of blocks
 public class ApplyColor extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		String color = req.getParameter("color");
