@@ -26,18 +26,18 @@ public class Login extends HttpServlet{
 			flag = util.Validate.validPass(mem, password);
 			if (flag) {
 				// Login is successful
-				req.getSession().setAttribute("uid", mem.getUid());
+				req.getSession().setAttribute("member", mem);
 				
-				rs = req.getRequestDispatcher("/portal.html");
-				rs.forward(req, resp);
+				resp.sendRedirect(req.getContextPath() + "/AuthOK/");
 			} else {
-				req.getSession().setAttribute("error", "Password is incorrect");
+				req.setAttribute("error", "Password is incorrect");
+				req.getRequestDispatcher("/index.jsp").forward(req, resp);
 			}
 		} else {
-			req.getSession().setAttribute("error", "User doesn't exist");
+			req.setAttribute("error", "User doesn't exist");
+			req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		}
-		rs = req.getRequestDispatcher("/index.jsp");
-		rs.forward(req, resp);
+		
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{

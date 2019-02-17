@@ -7,8 +7,8 @@ public class Member {
 	private String username;
 	private String password;
 	private String Canvas;
-	private String CanvasAccount;
-	private String schedule;
+	private String CanvasAccount; //username|password
+	private String schedule; 
 	public int getUid() {
 		return uid;
 	}
