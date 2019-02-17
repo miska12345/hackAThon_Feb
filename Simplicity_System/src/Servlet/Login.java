@@ -20,7 +20,7 @@ public class Login extends HttpServlet{
 		try {
 			mem = IDAOFactory.getIDAO().findByName(username);
 		} catch (Exception e) {
-			//Something is not right...
+			//Something is not right...	
 		}
 		if (mem != null) {
 			flag = util.Validate.validPass(mem, password);
@@ -30,12 +30,10 @@ public class Login extends HttpServlet{
 				
 				resp.sendRedirect(req.getContextPath() + "/AuthOK/");
 			} else {
-				req.setAttribute("error", "Password is incorrect");
-				req.getRequestDispatcher("/index.jsp").forward(req, resp);
+				resp.sendRedirect(req.getContextPath() + "/index.jsp?error=Password is incorrect");
 			}
 		} else {
-			req.setAttribute("error", "User doesn't exist");
-			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/index.jsp?error=User doesn't exist");
 		}
 		
 	}

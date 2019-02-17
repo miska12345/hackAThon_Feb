@@ -10,10 +10,9 @@ public class Local {
 			return null;
 		}
 		String str = "";
-		
-		str.concat(String.valueOf(mem.getUid()));
-		str.concat(mem.getUsername());
-		str.concat(mem.getCanvas());
+		str += String.valueOf(mem.getUid());
+		str += (mem.getUsername());
+		str += (mem.getCanvas());
 		
 		return str;
 	}
