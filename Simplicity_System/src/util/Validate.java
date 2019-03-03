@@ -12,4 +12,8 @@ public class Validate {
 	public static boolean isOnline(HttpSession session) {
 		return session.getAttribute("member") != null;
 	}
+	
+	public static boolean isValidCanvasAccount(String str) {
+		return str.contains("@");
+	}
 }

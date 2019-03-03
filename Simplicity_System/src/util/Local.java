@@ -1,6 +1,11 @@
 package util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +19,6 @@ public class Local {
 			return null;
 		}
 		String str = "";
-		str += String.valueOf(mem.getUid());
 		str += (mem.getUsername());
 		str += (mem.getCanvas());
 		
@@ -25,5 +29,17 @@ public class Local {
 		String path = req.getServletContext().getRealPath("/") + "Schedules" + File.separator +
 				mem.getSchedule()+".xml";
 		return path;
+	}
+	
+	public static void signalCrawler(Member mem, String realPath) throws IOException {
+		OutputStream output = new FileOutputStream(realPath + "command.txt");
+		File file = new File(realPath + "command.txt");
+		PrintStream printStream = new PrintStream(output);
+		String[] tmp = mem.getCanvasAccount().split("_");
+		if (tmp.length >= 2) {
+			printStream.println(tmp[0] + " " + tmp[1] + " " + mem.getCanvas() + " " + mem.getSchedule());
+		}
+		printStream.close();
+		output.close();
 	}
 }

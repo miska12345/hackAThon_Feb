@@ -16,7 +16,7 @@ public class IDAOImplement implements IDAOInterface {
 	@Override
 	public boolean doCreate(Member mem) throws Exception {
 		boolean flag = false;
-		String sql = "INSERT INTO member(Username,Password,Canvas,Canvas_Accounts,Schedule,DisplayName) VALUE (?,?,?,?,?)";
+		String sql = "INSERT INTO member(Username,Password,Canvas,Canvas_Accounts,Schedule,DisplayName) VALUE (?,?,?,?,?,?)";
 		this.psmt = this.conn.prepareStatement(sql);
 		this.psmt.setString(1, mem.getUsername());
 		this.psmt.setString(2, mem.getPassword());
@@ -89,6 +89,59 @@ public class IDAOImplement implements IDAOInterface {
 		this.psmt.setInt(2, uid);
 		if (this.psmt.executeUpdate() > 0) {
 			flag = true;
+		}
+		this.psmt.close();
+		return flag;
+	}
+	
+	public Topic findByTopic(String top) throws Exception {
+		Topic topic = null;
+		String sql = "SELECT Assignment,Comments FROM comments WHERE Assignment = ?";
+		this.psmt = this.conn.prepareStatement(sql);
+		this.psmt.setString(1, top);
+		ResultSet rs = this.psmt.executeQuery();
+		while (rs.next()) {
+			topic = new Topic();
+			Comment c = new Comment();
+			topic.setName(rs.getString(1));
+			
+			c.doParse(rs.getString(2));
+			topic.setCmd(c);
+		}
+
+		this.psmt.close();
+		return topic;
+	}
+	public boolean doCreateTopic(Topic top) throws Exception {
+		boolean flag = false;
+		String sql = "INSERT INTO comments(Assignment,Comments) VALUE (?,?)";
+		this.psmt = this.conn.prepareStatement(sql);
+		this.psmt.setString(1, top.getName());
+		this.psmt.setString(2, top.toString());
+		if (this.psmt.executeUpdate() > 0) {
+			flag = true;
+		}
+		this.psmt.close();
+		return flag;
+	}
+	@Override
+	public boolean insertComment(Topic top) throws Exception {
+		
+		return false;
+	}
+	@Override
+	public boolean doReplace(Topic top) throws Exception {
+		boolean flag = false;
+		if (this.findByTopic(top.getName()) == null) {
+			flag = this.doCreateTopic(top);
+		} else {
+			String sql = "UPDATE comments SET Comments  = ? WHERE Assignment = ?";
+			this.psmt = this.conn.prepareStatement(sql);
+			this.psmt.setString(1, top.toString());
+			this.psmt.setString(2, top.getName());
+			if (this.psmt.executeUpdate() > 0) {
+				flag = true;
+			}
 		}
 		this.psmt.close();
 		return flag;
