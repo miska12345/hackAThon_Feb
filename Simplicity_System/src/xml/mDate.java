@@ -13,7 +13,7 @@ public class mDate {
 		private String color;
 		public mDate() {
 			events = new ArrayList<>();
-			color = "#5697ff"; // Default color
+			color = "#5697ff";
 		}
 		
 		public List<mEvent> getEvents() {
